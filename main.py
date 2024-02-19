@@ -57,8 +57,8 @@ def wind_velocity(wind_speed_ms, direction_deg):
 
 
 # getting city and state or country from user
-city = input("What city are you finding the weather for? (ie. New York)")
-location = input("What state or country is this city in?")
+city = input("What city are you finding the weather for? ")
+location = input("What state or country is this city in? ")
 url = url = (
     f"http://api.openweathermap.org/data/2.5/weather?q={city},{location}&appid={key.API_KEY}"
 )
@@ -76,7 +76,9 @@ else:
 
 
 # get the weather data
+general_weather = data["weather"][0]["description"]
 temp_fahrenheit = k_to_f(data["main"]["temp"])
+temp_feels_like = k_to_f(data["main"]["feels_like"])
 temp_high = k_to_f(data["main"]["temp_max"])
 temp_low = k_to_f(data["main"]["temp_min"])
 sunrise_time = dt.datetime.utcfromtimestamp(data["sys"]["sunrise"] + data["timezone"])
@@ -85,7 +87,10 @@ humidity = data["main"]["humidity"]
 wind, direction = wind_velocity(data["wind"]["speed"], data["wind"]["deg"])
 
 # output the data
-print(f"The current temperature is {temp_fahrenheit:.2f}°F")
+print(f"The weather is {general_weather}")
+print(
+    f"The current temperature is {temp_fahrenheit:.2f}°F and it feels like {temp_feels_like:.2f}°F"
+)
 print(f"Today's high is {temp_high:.2f}°F")
 print(f"Today's low is {temp_low:.2f}°F")
 print(f"The humidity is {humidity}%")
