@@ -69,8 +69,6 @@ response = requests.get(url)
 # validate city and state or country
 if response.status_code == 200:
     data = response.json()
-    # Process the data as needed
-    print(data)
 else:
     raise ValueError("Failed to fetch data from OpenWeatherMap API")
 
